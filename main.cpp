@@ -6,6 +6,7 @@
 
 using namespace std;
 int pil;
+int x = 3, indt;
 
 struct data
 {
@@ -64,11 +65,12 @@ home:
     if (pil == 2)
     {
         system("cls");
-        int x, indt;
+
         cout << "menu input" << endl;
         cout << "berapa data yang ingin di input :";
         cin >> indt;
-        for (x = 3; x >= indt; --x)
+        int b = x;
+        for (x; x < indt + b; x++)
         {
             cout << "masukan data ke - " << x + 1 << endl;
             cout << "nama :";
@@ -79,7 +81,7 @@ home:
             cin >> member.tabungan[x];
             cout << endl;
         }
-        //x = indt;
+        x = (x + indt) - 1;
         // cout << "data berhasil di input" << endl;
         // cout << endl;
         // cout << "NO.\t\tNAMA\t\tNo.Identitas\t\tSaldo" << endl;
