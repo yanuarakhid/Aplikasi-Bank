@@ -1,11 +1,13 @@
 /* Standard C++ includes */
 #include <iostream> // untu3k mendeklarasikan bahasa c++
-#include <ctime>    //
-#include <cstdlib>  //untuk menerapkan CLS (clear screen)
-#include <fstream>  //untuk menerapkan varfile (akses file)
+#include <iomanip>
+#include <ctime>   //
+#include <cstdlib> //untuk menerapkan CLS (clear screen)
+#include <fstream> //untuk menerapkan varfile (akses file)
 
 using namespace std;
 int pil;
+
 int x = 3, indt;
 
 struct data
@@ -16,7 +18,7 @@ struct data
 
 } member;
 
-int jmlhdata = 3;
+//int jmlhdata = 3;
 //double panjang = sizeof member.tabungan / sizeof(member.tabungan[0]);
 
 void header()
@@ -30,10 +32,11 @@ void header()
     cout << "\t\t\t\t======================================================\n";
     cout << "\t\t\t\t\t1. Lihat Daftar Member & Tabungan" << endl;
     cout << "\t\t\t\t\t2. Masukan Data Member Baru" << endl;
-    cout << "\t\t\t\t\t3. Hapus Data Member" << endl;
-    cout << "\t\t\t\t\t4. Menabung" << endl;
-    cout << "\t\t\t\t\t5. Withdraw" << endl;
-    cout << "\t\t\t\t\t6. Keluar" << endl;
+    cout << "\t\t\t\t\t3. Edit Data" << endl;
+    cout << "\t\t\t\t\t4. Hapus Data Member" << endl;
+    cout << "\t\t\t\t\t5. Menabung" << endl;
+    cout << "\t\t\t\t\t6. Withdraw" << endl;
+    cout << "\t\t\t\t\t7. Keluar" << endl;
     // int c;
     //     for (c;c<=2;c++){
     //         cout << c+1 << "\t\t"<<member.nama[c]<<"\t\t"<<member.kitas[c]<<"\t\t"<<member.tabungan[c]<<endl;
@@ -50,29 +53,32 @@ home:
 
     if (pil == 1)
     {
+
+        system("cls");
+        cout << "+-----------------------------------------------------------------------+\n";
+        cout << "|" << setiosflags(ios::right) << setw(50) << "Daftar Member PT Bank Plecit" << setiosflags(ios::right) << setw(23) << "|\n";
+        cout << "+-----------------------------------------------------------------------+\n";
+        cout << "NO.\t\tNAMA\t\tNo.Identitas\t\tSaldo" << endl;
+        int i;
+        for (i = 0; i < x; i++)
         {
-            system("cls");
-            cout << "NO.\t\tNAMA\t\tNo.Identitas\t\tSaldo" << endl;
-            int i;
-            for (i = 0; i < 10; i++)
-            {
-                cout << i + 1 << "\t\t" << member.nama[i] << "\t\t" << member.kitas[i] << "\t\tRp. " << member.tabungan[i] << endl;
-            }
-            system("pause");
-            goto home;
+            cout << i + 1 << "\t\t" << member.nama[i] << "\t\t" << member.kitas[i] << "\t\tRp. " << member.tabungan[i] << endl;
         }
+        system("pause");
+        goto home;
     }
-    if (pil == 2)
+    else if (pil == 2)
     {
         system("cls");
-
-        cout << "menu input" << endl;
-        cout << "berapa data yang ingin di input :";
+        cout << "+-----------------------------------------------------------------------+\n";
+        cout << "|" << setiosflags(ios::right) << setw(50) << "Halaman Input Data Memer BAru" << setiosflags(ios::right) << setw(23) << "|\n";
+        cout << "+-----------------------------------------------------------------------+\n";
+        cout << "Berapa Jumlah Data yang akan Anda Inputkan > ";
         cin >> indt;
         int b = x;
         for (x; x < indt + b; x++)
         {
-            cout << "masukan data ke - " << x + 1 << endl;
+            cout << "Masukan Data Member ke - " << x + 1 << endl;
             cout << "nama :";
             cin >> member.nama[x];
             cout << "kitas :";
@@ -81,28 +87,107 @@ home:
             cin >> member.tabungan[x];
             cout << endl;
         }
-        x = (x + indt) - 1;
-        // cout << "data berhasil di input" << endl;
-        // cout << endl;
-        // cout << "NO.\t\tNAMA\t\tNo.Identitas\t\tSaldo" << endl;
-        // int i;
-        // for (i = 0; i < 10; i++)
-        // {
-        //     cout << i + 1 << "\t\t" << member.nama[i] << "\t\t" << member.kitas[i] << "\t\tRp. " << member.tabungan[i] << endl;
-        // }
+        x = (x + indt) - indt;
+        cout << x << endl;
+        cout << "data berhasil di input" << endl;
+        cout << endl;
+        cout << "NO.\t\tNAMA\t\tNo.Identitas\t\tSaldo" << endl;
+        int i;
+        for (i = 0; i < x; i++)
+        {
+            cout << i + 1 << "\t\t" << member.nama[i] << "\t\t" << member.kitas[i] << "\t\tRp. " << member.tabungan[i] << endl;
+        }
         system("pause");
         goto home;
     }
     else if (pil == 3)
     {
+        system("cls");
+        cout << "Edit Data Member" << endl;
+        cout << endl;
+        cout << "NO.\t\tNAMA\t\tNo.Identitas\t\tSaldo" << endl;
+        int i;
+        for (i = 0; i < 23; i++)
+        {
+            cout << i + 1 << "\t\t" << member.nama[i] << "\t\t" << member.kitas[i] << "\t\tRp. " << member.tabungan[i] << endl;
+        }
+        cout << endl;
+        int ya;
+        cout << "Untuk Edit Data Input Nomernya = ";
+        cin >> ya;
+        system("pause");
+        goto home;
     }
     else if (pil == 4)
     {
+    busak:
+        system("cls");
+        cout << "+-----------------------------------------------------------------------+\n";
+        cout << "|" << setiosflags(ios::right) << setw(50) << "Halaman Hapus Data User" << setiosflags(ios::right) << setw(23) << "|\n";
+        cout << "+-----------------------------------------------------------------------+\n";
+        cout << endl;
+        cout << "+-----------------------------------------------------------------------+\n";
+        cout << "|" << setiosflags(ios::right) << setw(50) << "Daftar Member PT Bank Plecit" << setiosflags(ios::right) << setw(23) << "|\n";
+        cout << "+-----------------------------------------------------------------------+\n";
+        cout << "NO.\t\tNAMA\t\tNo.Identitas\t\tSaldo" << endl;
+        int i;
+        for (i = 0; i < x; i++)
+        {
+            cout << i + 1 << "\t\t" << member.nama[i] << "\t\t" << member.kitas[i] << "\t\tRp. " << member.tabungan[i] << endl;
+        }
+        cout << endl;
+        string busak;
+
+        cout << "Input Nama data yang akan anda hapus > ";
+        cin >> busak;
+        bool delstatus = false;
+        //Perulangan untuk mencari data yang di inputkan user di index array
+        for (int j = 0; j < x; j++)
+        {
+            if (busak == member.nama[j])
+            {
+                //Jika nilai yang di masukkan user sesuai dengan salah satu
+                //Nilai data di index array
+                for (int k = j /* dimulai dari index nilai yang ditemukan */; k < x; k++)
+                {
+                    //Menggeser niali data pada index array sampai jumlah maksimal data array
+                    member.nama[k] /* Nilai index saat ini */ = member.nama[k + 1] /* Nilai index selanjutnya */;
+                    member.kitas[k] /* Nilai index saat ini */ = member.kitas[k + 1] /* Nilai index selanjutnya */;
+                    member.tabungan[k] /* Nilai index saat ini */ = member.tabungan[k + 1] /* Nilai index selanjutnya */;
+                }
+
+                // Mengurangi jumlah array karena saah satu datanya telah dihapus
+                x -= 1;
+                delstatus = true;
+                break;
+            }
+            // else if (busak == member.nama[j])
+            //
+        }
+        if (delstatus == false)
+        {
+            cout << "Data " << busak << " Not Found Pen !!!" << endl;
+            system("pause");
+            goto busak;
+        }
+        cout << "+-----------------------------------------------------------------------+\n";
+        cout << "|" << setiosflags(ios::right) << setw(50) << "Daftar Member PT Bank Plecit" << setiosflags(ios::right) << setw(23) << "|\n";
+        cout << "+-----------------------------------------------------------------------+\n";
+        cout << "NO.\t\tNAMA\t\t\tNo.Identitas\t\t\tSaldo" << endl;
+        for (i = 0; i < x; i++)
+        {
+            cout << i + 1 << "\t\t" << member.nama[i] << "\t\t\t" << member.kitas[i] << "\t\t\tRp. " << member.tabungan[i] << endl;
+        }
+        system("pause");
+        goto home;
     }
     else if (pil == 5)
     {
     }
     else if (pil == 6)
+    {
+    }
+    else if (pil == 7)
     {
         cout << "\t\t\t\t";
         system("pause");
