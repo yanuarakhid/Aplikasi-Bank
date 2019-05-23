@@ -103,17 +103,18 @@ home:
     else if (pil == 3)
     {
         system("cls");
-        cout << "Edit Data Member" << endl;
-        cout << endl;
+        cout << "+-----------------------------------------------------------------------+\n";
+        cout << "|" << setiosflags(ios::right) << setw(50) << "Menu Edit Data Member PT Bank Plecit" << setiosflags(ios::right) << setw(23) << "|\n";
+        cout << "+-----------------------------------------------------------------------+\n";
         cout << "NO.\t\tNAMA\t\tNo.Identitas\t\tSaldo" << endl;
         int i;
-        for (i = 0; i < 23; i++)
+        for (i = 0; i < x; i++)
         {
             cout << i + 1 << "\t\t" << member.nama[i] << "\t\t" << member.kitas[i] << "\t\tRp. " << member.tabungan[i] << endl;
         }
         cout << endl;
         int ya;
-        cout << "Untuk Edit Data Input Nomernya = ";
+        cout << "Untuk Edit Data Input Namanya = ";
         cin >> ya;
         system("pause");
         goto home;
@@ -126,9 +127,6 @@ home:
         cout << "|" << setiosflags(ios::right) << setw(50) << "Halaman Hapus Data User" << setiosflags(ios::right) << setw(23) << "|\n";
         cout << "+-----------------------------------------------------------------------+\n";
         cout << endl;
-        cout << "+-----------------------------------------------------------------------+\n";
-        cout << "|" << setiosflags(ios::right) << setw(50) << "Daftar Member PT Bank Plecit" << setiosflags(ios::right) << setw(23) << "|\n";
-        cout << "+-----------------------------------------------------------------------+\n";
         cout << "NO.\t\tNAMA\t\tNo.Identitas\t\tSaldo" << endl;
         int i;
         for (i = 0; i < x; i++)
@@ -186,6 +184,10 @@ home:
     }
     else if (pil == 6)
     {
+        cout << "+-----------------------------------------------------------------------+\n";
+        cout << "|" << setiosflags(ios::right) << setw(50) << "Menu Penarikan Uang" << setiosflags(ios::right) << setw(23) << "|\n";
+        cout << "+-----------------------------------------------------------------------+\n";
+        cout << endl;
     }
     else if (pil == 7)
     {
