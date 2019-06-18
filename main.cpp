@@ -7,14 +7,19 @@
 
 using namespace std;
 int pil;
-
-int x = 3, indt;
+// int rekening = 859274871;
+// int norekening()
+// {
+//     cout << rekening << endl;
+//     return ++rekening;
+int x = 3, indt, rek = 859274873;
 
 struct data
 {
     string nama['a'] = {"Susilo", "Akbar", "Tanjung"};
     string kitas['b'] = {"89076", "22311", "131311"};
     double tabungan['c'] = {20000, 30000, 50000};
+    int rekening['d'] = {859274871, 859274872, 859274873};
 
 } member;
 
@@ -58,11 +63,11 @@ home:
         cout << "+-----------------------------------------------------------------------+\n";
         cout << "|" << setiosflags(ios::right) << setw(50) << "Daftar Member PT Bank Plecit" << setiosflags(ios::right) << setw(23) << "|\n";
         cout << "+-----------------------------------------------------------------------+\n";
-        cout << "NO.\t\tNAMA\t\tNo.Identitas\t\tSaldo" << endl;
+        cout << "NO.\t\tNAMA\t\tNo.Identitas\t\tSaldo\t\t\tNo.Rekening" << endl;
         int i;
         for (i = 0; i < x; i++)
         {
-            cout << i + 1 << "\t\t" << member.nama[i] << "\t\t" << member.kitas[i] << "\t\tRp. " << member.tabungan[i] << endl;
+            cout << i + 1 << "\t\t" << member.nama[i] << "\t\t" << member.kitas[i] << "\t\t\tRp. " << member.tabungan[i] << "\t\t" << member.rekening[i] << endl;
         }
         system("pause");
         goto home;
@@ -86,9 +91,11 @@ home:
             cout << "tabungan :";
             cin >> member.tabungan[x];
             cout << endl;
+            cout << "rekening :";
+            cin >> member.rekening[x];
         }
         x = (x + indt) - indt;
-        cout << x << endl;
+        //cout << x << endl;
         cout << "data berhasil di input" << endl;
         cout << endl;
         cout << "NO.\t\tNAMA\t\tNo.Identitas\t\tSaldo" << endl;
@@ -188,6 +195,13 @@ home:
         cout << "|" << setiosflags(ios::right) << setw(50) << "Menu Penarikan Uang" << setiosflags(ios::right) << setw(23) << "|\n";
         cout << "+-----------------------------------------------------------------------+\n";
         cout << endl;
+        int i;
+        for (i = 0; i < x; i++)
+        {
+            cout << i + 1 << "\t\t" << member.nama[i] << "\t\t" << member.kitas[i] << "\t\tRp. " << member.tabungan[i] << endl;
+        }
+        cout << endl;
+        cout << "Masukan Nama User Yang Akan";
     }
     else if (pil == 7)
     {
