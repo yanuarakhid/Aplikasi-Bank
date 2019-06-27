@@ -48,6 +48,95 @@ struct antrian
 }antri;
 
 
+void first()
+{
+	antri.awal = -1;
+	antri.akhir = -1;
+}
+
+bool isfull()
+{
+	if(antri.akhir == MAX-1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+bool isempty()
+{
+	if(antri.akhir == -1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+void tampilkanantrian()
+{
+	if(!isempty())
+	{
+        cout<<"STATUS SAAT INI : "<<endl<<endl;
+		for(int ant=antri.awal; ant<antri.akhir; ant++)
+		{
+			cout<<antri.data[ant]<<" | ";
+		}
+	}else{
+        
+		cout<<"STATUS SAAT INI : "<<endl<<endl;
+		cout<<"UNTUK SAAT INI TIDAK ADA ANTRIAN"<<endl;
+	}
+	cout<<endl;
+}
+
+void ambilantrian()
+{
+	int nomer;
+	float total;
+	if(!isfull())
+	{
+		cout<<"Masukan Nomer Antrian : ";
+		cin>>nomer;
+		cout<<"data berhasil ditambah"<<endl<<endl;
+		antri.data[antri.akhir] = nomer;
+		total = total + antri.data[antri.akhir];
+		antri.akhir++;
+	}
+	else
+	{
+		cout<<"Antrian penuh"<<endl<<endl;
+	}
+}
+
+void format()
+{
+	antri.awal = -1;
+	antri.akhir = -1;
+	cout<<"Antrian Berhasil Dikosongkan..."<<endl<<endl;
+}
+
+void panggilantrian()
+{
+	if(!isempty())
+	{
+		cout<<"mengambil data "<<antri.data[antri.awal]<<endl;
+		for(int i=antri.awal; i<antri.akhir; i++)
+		{
+			antri.data[i]=antri.data[i+1];
+		}
+		antri.akhir--;
+		cout<<"data berhasil dihapus"<<endl<<endl;
+	}
+	else
+	{
+		cout<<"Queue kosong"<<endl<<endl;
+	}
+}
+
 // Fungsi Dashborad Menu
 void header()
 {
@@ -91,25 +180,23 @@ home:
         cout << "Ambil Dan Panggil Antrian" << endl;
         cout << "[1] Ambilkan Antrian" << endl;
         cout << "[2] Panggil Antrian" << endl;
-        cout << "[3] Kembali Ke Menu" << endl;
+        cout << "[3] Kosongkan Antrian" << endl;
+        cout << "[4] Kembali Ke Menu" << endl;
         cout << endl;
+        tampilkanantrian();
         int antr;
         cout << "Masukan Pilihan Anda [1/2/3] > ";
         cin >> antr;
-        if (antr == 1)
-        {
-            cout << "fitur belum ada" << endl;
-            system("pause");
-            goto home;
-        }
-        else if (antr == 2)
-        {
-            cout << "fitur belum ada" << endl;
-            system("pause");
-            goto home;
-        }
-        else if (antr == 3)
-        {
+        if (antr == 1){
+            ambilantrian();
+            goto ant;
+        }else if (antr == 2){
+            panggilantrian();
+            goto ant;
+        }else if (antr == 3){
+            format();
+            goto ant;
+        }else if (antr == 4){
             goto home;
         }
         else
@@ -521,7 +608,6 @@ home:
                     }
                     else if (ps == 'n' || ps == 'N')
                     {
-                        system("cls");
                         system("pause");
                         goto home;
                     }
