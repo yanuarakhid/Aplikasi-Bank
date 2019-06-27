@@ -3,6 +3,8 @@
 #include <iomanip>
 #include <ctime>   //Mengambil Lib Tangga
 #include <fstream> //untuk menerapkan varfile (akses file)
+#define MAX 100 //Mendefinisikan besar arayy untuk queue
+
 using namespace std;
 /*
 Judul FP    : Aplikasi Perbankan 
@@ -27,18 +29,29 @@ Aplikasi Dibuat Oleh :
 
 //global Scope Variabel
 int x = 4, indt, pil;
+
+
 //Tempat Menampung Data
 struct data
 {
     string username[100] = {"susilopwr", "Ahmadtnj", "makmur34", "riyadiaja"};
     string nama[100] = {"Susilo Pawiro", "Ahmad Tanjung", "Makmur Abadi", "Slamet Riyadi"};
-    string identity[100] = {"89076", "131311", "312132", "123212"};
-    double tabungan[100] = {20000, 50000, 30000, 80000};
+    string identity[100] = {"3131313", "131311", "312132", "123212"};
+    float tabungan[100] = {20000, 50000, 30000, 80000};
 } member;
 
+//Struct Untuk Queue
+struct antrian
+{
+    int data[MAX];
+    int awal,akhir;
+}antri;
+
+
+// Fungsi Dashborad Menu
 void header()
 {
-    // Fungsi Dashborad Menu
+    
     system("cls");
     cout << "========================================================\n";
     cout << "                   WELCOME ADMIN !!!\n";
@@ -136,7 +149,7 @@ home:
         {
             //deklarasi tampungan array untuk sort
             string copynama[100], copyusername[100], copyidentity[100], tempnama, tempusername, tempidentity;
-            double copytabungan[100], temptabungan;
+            float copytabungan[100], temptabungan;
             int f, g, u, r;
             int h = x;
             //mengcopy array utama ke array khusus sorting
@@ -264,11 +277,31 @@ home:
                 cout << "Informasi Data Anda Saat Ini" << endl;
                 cout << "Username       : " << member.username[i] << endl;
                 cout << "Nama Member    : " << member.nama[i] << endl;
-                cout << "Saldo Tabungan : " << member.tabungan[i]<< endl;
+                cout << "Saldo Tabungan : Rp. " << member.tabungan[i]<< endl;
                 cout << "No. Identitas  : " << member.identity[i] << endl;
                 cout << endl;
-                system("pause");
-                goto home;
+                char pila;
+                cout<<"Apakah Anda Yakin Ingin Mengubah Data Tersebut ? (Y/N) =>> ";cin>>pila;
+                if (pila=='y'||pila=='Y'){
+                    cout << "Ubah Data member " << member.username[i] << endl;
+                    cout << "Ubah Nama          : ";
+                    cin >> member.nama[i];
+                    cout << "Ubah no Identitas  : ";
+                    cin >> member.identity[i];
+                    cout << "Ubah Username      : ";
+                    cin >> member.username[i];
+                    cout<<endl;
+                    cout<<"DATA BERHASIL DIUBAH !!!"<<endl;
+                    system("pause");
+                    goto home;
+                }else if (pila=='n'||pila=='N'){
+                    system("pause");
+                    goto home;
+                }else {
+                    cout<<"Inputan Yang anda Masukan Salah !!!, Inputkan (Y/N)"<<endl<<endl;
+                    system("pause");
+
+                }
             }
         }
     }
@@ -380,7 +413,7 @@ home:
                 cout << "Saldo Tabungan : " << member.tabungan[i] << endl;
                 cout << "No. Identitas  : " << member.identity[i] << endl;
                 cout << endl;
-                double baru;
+                float baru;
                 cout << "Masukan Jumlah Uang Yang akan Ditabung = Rp. ";
                 cin >> baru;
                 member.tabungan[i] = baru + member.tabungan[i];
@@ -409,7 +442,7 @@ home:
     bali:
         system("cls");
         string ambil;
-        double buang;
+        float buang;
         cout << "|======================================================================================|\n";
         cout << "|                                  Menu Penarikan Uang                                 |\n";
         cout << "|======================================================================================|\n";
@@ -437,7 +470,7 @@ home:
                 cout << "Saldo Tabungan : Rp. " << member.tabungan[i]<< endl;
                 cout << "No. Identitas  : " << member.identity[i] << endl;
                 cout << endl;
-                double baru;
+                float baru;
                 cout << "Masukan Jumlah Uang yang akan diambil = Rp. ";
                 cin >> baru;
                 if (baru > member.tabungan[i])
