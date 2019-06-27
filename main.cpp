@@ -1,8 +1,7 @@
 /* Standard C++ includes */
 #include <iostream> // untu3k mendeklarasikan bahasa c++
 #include <iomanip>
-#include <ctime>   //Mengambil Lib Tanggal
-#include <cstdlib> //untuk menerapkan CLS (clear screen)
+#include <ctime>   //Mengambil Lib Tangga
 #include <fstream> //untuk menerapkan varfile (akses file)
 using namespace std;
 /*
@@ -27,15 +26,14 @@ Aplikasi Dibuat Oleh :
 */
 
 //global Scope Variabel
-int x = 2, indt, pil;
-
+int x = 4, indt, pil;
 //Tempat Menampung Data
 struct data
 {
-    string username['a']={"susilo43","tanjungaja41"};
-    string nama['b'] = {"Susilo", "Tanjung"};
-    string identity['c'] = {"89076", "131311"};
-    double tabungan['d'] = {20000, 50000};
+    string username[100] = {"susilopwr", "Ahmadtnj", "makmur34", "riyadiaja"};
+    string nama[100] = {"Susilo Pawiro", "Ahmad Tanjung", "Makmur Abadi", "Slamet Riyadi"};
+    string identity[100] = {"89076", "131311", "312132", "123212"};
+    double tabungan[100] = {20000, 50000, 30000, 80000};
 } member;
 
 void header()
@@ -48,16 +46,17 @@ void header()
     cout << endl;
     cout << "            Aplikasi Perbankan Version 1.0   " << endl;
     cout << "========================================================\n";
-    cout<<endl;
-    cout << "[1] List Member Bank" << endl;
-    cout << "[2] Input Data Member Baru" << endl;
-    cout << "[3] Edit Data Member" << endl;
-    cout << "[4] Hapus Data Member" << endl;
-    cout << "[5] Menabung" << endl;
-    cout << "[6] Penarikan" << endl;
-    cout << "[7] Pencarian Data" << endl;
-    cout << "[8] Tentang Kami" << endl;
-    cout << "[9] Keluar" << endl;
+    cout << endl;
+    cout << "[1] No.Antrian" << endl;
+    cout << "[2] List Member Bank" << endl;
+    cout << "[3] Input Data Member Baru" << endl;
+    cout << "[4] Edit Data Member" << endl;
+    cout << "[5] Hapus Data Member" << endl;
+    cout << "[6] Menabung" << endl;
+    cout << "[7] Penarikan" << endl;
+    cout << "[8] Pencarian Data" << endl;
+    cout << "[9] Tentang Kami" << endl;
+    cout << "[10] Keluar" << endl;
     cout << endl;
 }
 
@@ -66,57 +65,156 @@ int main()
 {
 home:
     header(); //Pemanggilan Menu
-    cout << "INPUT PILIHAN =>> ";cin >> pil;
-
+    cout << "INPUT PILIHAN =>> ";
+    cin >> pil;
     if (pil == 1)
     {
-        sor://label
+    ant:
+        system("cls");
+        cout << "|======================================================================================|\n";
+        cout << "|                                          Antrian                                     |\n";
+        cout << "|======================================================================================|\n";
+        cout << endl;
+        cout << "Ambil Dan Panggil Antrian" << endl;
+        cout << "[1] Ambilkan Antrian" << endl;
+        cout << "[2] Panggil Antrian" << endl;
+        cout << "[3] Kembali Ke Menu" << endl;
+        cout << endl;
+        int antr;
+        cout << "Masukan Pilihan Anda [1/2/3] > ";
+        cin >> antr;
+        if (antr == 1)
+        {
+            cout << "fitur belum ada" << endl;
+            system("pause");
+            goto home;
+        }
+        else if (antr == 2)
+        {
+            cout << "fitur belum ada" << endl;
+            system("pause");
+            goto home;
+        }
+        else if (antr == 3)
+        {
+            goto home;
+        }
+        else
+        {
+            cout << "Inputan Anda Salah ,INputkan Pilihan [1 / 2 / 3]" << endl;
+            system("pause");
+            goto ant;
+        }
+    }
+    else if (pil == 2)
+    {
+    sor: //label
         system("cls");
         cout << "|======================================================================================|\n";
         cout << "|                                      List Member Bank                                |\n";
         cout << "|======================================================================================|\n";
-        cout<<endl;
-        cout << "NO.\tUSERNAME\t\tNAMA\t\tNo.Identitas\t\tSaldo" << endl;
+        cout << endl;
+        cout << "NO.\tUSERNAME\tNAMA MEMBER\t\tNo.Identitas\t\tSaldo" << endl;
         int i;
         for (i = 0; i < x; i++)
         {
-            cout << i + 1 << "\t" <<member.username[i]<<"\t\t"<< member.nama[i] << "\t\t" << member.identity[i] << "\t\t\tRp. " << member.tabungan[i] << endl;
+            cout << i + 1 << "."
+                 << "\t" << member.username[i] << "\t" << member.nama[i] << "\t\t" << member.identity[i] << "\t\t\tRp. " << member.tabungan[i]<< endl;
         }
-        cout<<endl;
+        cout << endl;
         cout << "|======================================================================================|\n";
-        cout<<endl;
-        cout<<"Lakukan Per-Sortingan "<<endl;
-        cout<<"[1] Mode Ascending (A to Z)"<<endl;
-        cout<<"[2] Mode Discending (Z to A)"<<endl;
-        cout<<"[3] Kembali Ke Menu"<<endl;
-        cout <<endl;
+        cout << endl;
+        cout << "Lakukan Per-Sortingan " << endl;
+        cout << "[1] Mode Ascending (A to Z)" << endl;
+        cout << "[2] Mode Discending (Z to A)" << endl;
+        cout << "[3] Kembali Ke Menu" << endl;
+        cout << endl;
         int sort;
-        cout<< "Masukan Pilihan Anda [1/2/3] > ";cin>>sort;
-        if (sort == 1){
-            cout<<"fitur belum ada"<<endl;
+        cout << "Masukan Pilihan Anda [1/2/3] > ";
+        cin >> sort;
+        if (sort == 1)
+        {
+            //deklarasi tampungan array untuk sort
+            string copynama[100], copyusername[100], copyidentity[100], tempnama, tempusername, tempidentity;
+            double copytabungan[100], temptabungan;
+            int f, g, u, r;
+            int h = x;
+            //mengcopy array utama ke array khusus sorting
+            for (f = 0; f < x; f++)
+            {
+                copynama[f] = member.nama[f];
+                copyusername[f] = member.username[f];
+                copyidentity[f] = member.identity[f];
+                copytabungan[f] = member.tabungan[f];
+            }
+            for (g = 0; g < h; g++)
+            {
+                u = g;
+                for (r = g + 1; r < h; r++)
+                {
+                    if (copynama[r] < copynama[u])
+                    {
+                        u = r;
+                    }
+                }
+                tempnama = copynama[g];
+                copynama[g] = copynama[u];
+                copynama[u] = tempnama;
+
+                tempusername = copyusername[g];
+                copyusername[g] = copyusername[u];
+                copyusername[u] = tempusername;
+
+                tempidentity = copyidentity[g];
+                copyidentity[g] = copyidentity[u];
+                copyidentity[u] = tempidentity;
+
+                temptabungan = copytabungan[g];
+                copytabungan[g] = copytabungan[u];
+                copytabungan[u] = temptabungan;
+            }
+            cout << endl;
+            cout << "|======================================================================================|\n";
+            cout << "|                           Data Terurut Dengan Mode Ascending (A-Z)                   |\n";
+            cout << "|======================================================================================|\n";
+            cout << endl;
+            cout << "NO.\tUSERNAME\tNAMA MEMBER\t\tNo.Identitas\t\tSaldo" << endl;
+            for (int ur = 0; ur < x; ur++)
+            {
+                cout << ur + 1 << "."
+                     << "\t" << copyusername[ur] << "\t" << copynama[ur] << "\t\t" << copyidentity[ur] << "\t\t\tRp. " << copytabungan[ur]<< endl;
+            }
+            cout << endl;
+            cout << "|======================================================================================|\n";
             system("pause");
             goto home;
-        }else if(sort==2){
-            cout<<"fitur belum ada"<<endl;
+        }
+        else if (sort == 2)
+        {
+            cout << "fitur belum ada" << endl;
             system("pause");
             goto home;
-        }else if (sort==3){
+        }
+        else if (sort == 3)
+        {
             goto home;
-        }else{
-            cout <<"Inputan Anda Salah ,INputkan Pilihan [1 / 2 / 3]"<<endl;
+        }
+        else
+        {
+            cout << "Inputan Anda Salah ,INputkan Pilihan [1 / 2 / 3]" << endl;
             system("pause");
             goto sor;
         }
         system("pause");
         goto home;
     }
-    else if (pil == 2)
+    else if (pil == 3)
     {
         system("cls");
         cout << "|======================================================================================|\n";
         cout << "|                                      Menu Tambah Member                              |\n";
         cout << "|======================================================================================|\n";
-        cout<<endl;
+        cout << endl;
         cout << "Berapa Jumlah Data yang akan Anda Inputkan > ";
         cin >> indt;
         int b = x;
@@ -131,7 +229,7 @@ home:
             cin >> member.tabungan[x];
             cout << "Buat Username  : ";
             cin >> member.username[x];
-            cout <<endl;
+            cout << endl;
         }
         //update x variable
         x = (x + indt) - indt;
@@ -140,7 +238,7 @@ home:
         system("pause");
         goto home;
     }
-    else if (pil == 3)
+    else if (pil == 4)
     {
         system("cls");
         cout << "|======================================================================================|\n";
@@ -150,7 +248,7 @@ home:
         int i;
         for (i = 0; i < x; i++)
         {
-            cout << i + 1 << "\t" <<member.username[i] << endl;
+            cout << i + 1 << "\t" << member.username[i] << endl;
         }
         cout << endl;
         string nm;
@@ -161,12 +259,12 @@ home:
         {
             if (nm == member.username[i])
             {
-                cout <<"Halo !!!, "<<member.username[i]; 
-                cout <<endl;
+                cout << "Halo !!!, " << member.username[i];
+                cout << endl;
                 cout << "Informasi Data Anda Saat Ini" << endl;
                 cout << "Username       : " << member.username[i] << endl;
                 cout << "Nama Member    : " << member.nama[i] << endl;
-                cout << "Saldo Tabungan : " << member.tabungan[i] << endl;
+                cout << "Saldo Tabungan : " << member.tabungan[i]<< endl;
                 cout << "No. Identitas  : " << member.identity[i] << endl;
                 cout << endl;
                 system("pause");
@@ -174,7 +272,7 @@ home:
             }
         }
     }
-    else if (pil == 4)
+    else if (pil == 5)
     {
     busak:
         system("cls");
@@ -186,11 +284,11 @@ home:
         int i;
         for (i = 0; i < x; i++)
         {
-            cout << i + 1 << "\t" <<member.username[i]<<endl;
+            cout << i + 1 << "\t" << member.username[i] << endl;
         }
         cout << endl;
         string busak;
-        
+
         cout << "Untuk Hapus Data Input Username Member = ";
         cin >> busak;
         bool delstatus = false;
@@ -201,50 +299,57 @@ home:
             {
                 //Jika nilai yang di masukkan user sesuai dengan salah satu
                 //Nilai data di index array
-                cout <<"Halo !!!, "<<member.username[j]; 
-                cout <<endl;
+                cout << "Halo !!!, " << member.username[j];
+                cout << endl;
                 cout << "Informasi Data Anda Saat Ini" << endl;
                 cout << "Username       : " << member.username[j] << endl;
                 cout << "Nama Member    : " << member.nama[j] << endl;
-                cout << "Saldo Tabungan : " << member.tabungan[j] << endl;
+                cout << "Saldo Tabungan : Rp. " << member.tabungan[j]<< endl;
                 cout << "No. Identitas  : " << member.identity[j] << endl;
                 cout << endl;
                 char hps;
-                cout << "Apakah Anda Yakin Ingin Mengahupus Data Tersebut ? (y/n) > ";cin>>hps;
-                    if (hps=='y'||hps=='Y'){
-                        for (int k = j /* dimulai dari index nilai yang ditemukan */; k < x; k++){
+                cout << "Apakah Anda Yakin Ingin Mengahupus Data Tersebut ? (y/n) > ";
+                cin >> hps;
+                if (hps == 'y' || hps == 'Y')
+                {
+                    for (int k = j /* dimulai dari index nilai yang ditemukan */; k < x; k++)
+                    {
                         //Menggeser niali data pada index array sampai jumlah maksimal data array
                         member.username[k] /* Nilai index saat ini */ = member.username[k + 1] /* Nilai index selanjutnya */;
                         member.nama[k] /* Nilai index saat ini */ = member.nama[k + 1] /* Nilai index selanjutnya */;
                         member.identity[k] /* Nilai index saat ini */ = member.identity[k + 1] /* Nilai index selanjutnya */;
                         member.tabungan[k] /* Nilai index saat ini */ = member.tabungan[k + 1] /* Nilai index selanjutnya */;
                     }
-                        // Mengurangi jumlah array karena saah satu datanya telah dihapus
-                        x -= 1;
-                        delstatus = true;
-                        cout<<"Data Berhasil Dihapus !!!"<<endl;
-                        cout <<endl;
-                        break;
-                    }else if (hps=='n'||hps =='N'){
-                        system("pause");
-                        goto home;
-                    }else{
-                        cout <<"Inputan Salah,Inputkan (y/n)"<<endl;
-                        system("pause");
-                        goto home;
-                    }
+                    // Mengurangi jumlah array karena saah satu datanya telah dihapus
+                    x -= 1;
+                    delstatus = true;
+                    cout << "Data Berhasil Dihapus !!!" << endl;
+                    cout << endl;
+                    break;
+                }
+                else if (hps == 'n' || hps == 'N')
+                {
+                    system("pause");
+                    goto home;
+                }
+                else
+                {
+                    cout << "Inputan Salah,Inputkan (y/n)" << endl;
+                    system("pause");
+                    goto home;
+                }
             }
         }
         if (delstatus == false)
         {
-            cout << "Username " << busak << "Tidak Ditemukan !!!" << endl;
+            cout << "Username " << busak << " Tidak Ditemukan !!!" << endl;
             system("pause");
             goto busak;
         }
         system("pause");
         goto home;
     }
-    else if (pil == 5)
+    else if (pil == 6)
     {
     tabg:
         system("cls");
@@ -256,7 +361,7 @@ home:
         int i;
         for (i = 0; i < x; i++)
         {
-            cout << i + 1 << "\t" <<member.username[i]<< endl;
+            cout << i + 1 << "\t" << member.username[i] << endl;
         }
         cout << endl;
         string tab;
@@ -267,8 +372,8 @@ home:
         {
             if (tab == member.username[i])
             {
-                cout <<"Halo !!!, "<<member.username[i]; 
-                cout <<endl;
+                cout << "Halo !!!, " << member.username[i];
+                cout << endl;
                 cout << "Informasi Data Anda Saat Ini" << endl;
                 cout << "Username       : " << member.username[i] << endl;
                 cout << "Nama Member    : " << member.nama[i] << endl;
@@ -286,7 +391,7 @@ home:
                 cout << endl;
                 for (i = 0; i < x; i++)
                 {
-                    cout << i + 1 << "\t" <<member.username[i]<<"\t\t"<< member.nama[i] << "\t\t" << member.identity[i] << "\t\t\tRp. " << member.tabungan[i] << endl;
+                    cout << i + 1 << "\t" << member.username[i] << "\t\t" << member.nama[i] << "\t\t" << member.identity[i] << "\t\t\tRp. " << member.tabungan[i] << endl;
                 }
                 system("pause");
                 goto home;
@@ -299,7 +404,7 @@ home:
             goto tabg;
         }
     }
-    else if (pil == 6)
+    else if (pil == 7)
     {
     bali:
         system("cls");
@@ -313,7 +418,7 @@ home:
         int i;
         for (i = 0; i < x; i++)
         {
-            cout << i + 1 << "\t" <<member.username[i]<< endl;
+            cout << i + 1 << "\t" << member.username[i] << endl;
         }
         cout << endl;
         string tarik;
@@ -324,12 +429,12 @@ home:
         {
             if (tarik == member.username[i])
             {
-                cout <<"Halo !!!, "<<member.username[i]; 
-                cout <<endl;
+                cout << "Halo !!!, " << member.username[i];
+                cout << endl;
                 cout << "Informasi Data Anda Saat Ini" << endl;
                 cout << "Username       : " << member.username[i] << endl;
                 cout << "Nama Member    : " << member.nama[i] << endl;
-                cout << "Saldo Tabungan : " << member.tabungan[i] << endl;
+                cout << "Saldo Tabungan : Rp. " << member.tabungan[i]<< endl;
                 cout << "No. Identitas  : " << member.identity[i] << endl;
                 cout << endl;
                 double baru;
@@ -351,22 +456,45 @@ home:
                     cout << "Informasi Data Anda Saat Ini" << endl;
                     cout << "Username       : " << member.username[i] << endl;
                     cout << "Nama Member    : " << member.nama[i] << endl;
-                    cout << "Saldo Tabungan : " << member.tabungan[i] << endl;
+                    cout << "Saldo Tabungan : Rp. " << member.tabungan[i]<< endl;
                     cout << "No. Identitas  : " << member.identity[i] << endl;
                     cout << endl;
-                    print:
+                print:
                     char ps;
-                    cout <<"Apakah Anda Akan Print Struck ? (y/n) > ";cin >>ps;
-                    if (ps=='y'||ps=='Y'){
-                        cout <<"fitur belum ada";
+                    cout << "Apakah Anda Akan Print Struck ? (y/n) > ";
+                    cin >> ps;
+                    if (ps == 'y' || ps == 'Y')
+                    {
+                        time_t now = time(0);
+                        char* dt = ctime(&now);
+                        //cout << << endl;
+                        ofstream struk;
+                        struk.open("struk.txt");
+                        struk<<"==================================================\n";
+                        struk<<"\t\tPT. BANK PLECIT MAKMUR JAYA\n";
+                        struk<<"\tWaktu Penarikan : " << dt;
+                        struk<<"==================================================\n";
+                        struk<<endl;
+                        struk << "Nama Member           : " << member.nama[i]<<"\n";
+                        struk << "Jumlah Uang Diambil   : Rp. " << baru<<"\n";
+                        struk << "Sisa Saldo Tabungan   : Rp. " << member.tabungan[i]<<"\n";
+                        struk<<endl;
+                        struk<<"=================================================\n";
+                        struk<<"\tTERIMAKASIH TELAH MELAKUKAN TRANSAKSI\n";  
+                        struk.close();
+                        system("notepad.exe struk.txt");
                         system("pause");
                         goto home;
-                    }else if (ps=='n'||ps =='N'){
+                    }
+                    else if (ps == 'n' || ps == 'N')
+                    {
                         system("cls");
                         system("pause");
                         goto home;
-                    }else{
-                        cout <<"Inputan Salah,Inputkan (y/n)"<<endl;
+                    }
+                    else
+                    {
+                        cout << "Inputan Salah,Inputkan (y/n)" << endl;
                         system("pause");
                         goto print;
                     }
@@ -375,58 +503,106 @@ home:
         }
         if (take == false)
         {
-            cout << "Username " << tarik << "Tidak Ditemukan !!!" << endl;
+            cout << "Username " << tarik << " Tidak Ditemukan !!!" << endl;
             system("pause");
             goto bali;
         }
-    }
-    else if (pil == 7)
-    {
-        system("cls");
-        cout << "|======================================================================================|\n";
-        cout << "|                                      Menu Pencarian Data                             |\n";
-        cout << "|======================================================================================|\n";
-        cout<<endl;
-        cout << "NO.\tUSERNAME"<< endl;
-        int i;
-        for (i = 0; i < x; i++)
-        {
-            cout << i + 1 << "\t" <<member.username[i]<<endl;
-        }
-        cout<<endl;
-        cout << "|======================================================================================|\n";
-        string cari;
-        cout<<endl;
-        cout <<"Inputkan Username Data yang Akan Anda Cari > ";
-        cin >>cari;
     }
     else if (pil == 8)
     {
         system("cls");
         cout << "|======================================================================================|\n";
-        cout << "|                                      Tentang                                         |\n";
+        cout << "|                                      Menu Pencarian Data                             |\n";
         cout << "|======================================================================================|\n";
-        cout<<endl;
-        cout <<"Aplikasi Ini Dibuat Oleh : "<<endl;
-        cout <<"1. Dika"<<endl;
-        cout <<"2. Ari"<<endl;
-        cout <<"3. Fahrudin"<<endl;
-        cout <<"4. Aji"<<endl;
-        cout <<"5. Ragil"<<endl;
-        cout <<"6. Reza"<<endl;
-        cout <<"7. Tirta"<<endl;
-        cout <<"8. Adil"<<endl;
-        cout <<"9. Akhid"<<endl;
-        cout<<endl;
+        cout << endl;
+        cout << "NO.\tUSERNAME" << endl;
+        int i;
+        for (i = 0; i < x; i++)
+        {
+            cout << i + 1 << "\t" << member.username[i] << endl;
+        }
+        cout << endl;
         cout << "|======================================================================================|\n";
-        system("pause");
-        goto home;
+        string cari;
+        cout << endl;
+        bool golek = false;
+        cout << "Inputkan Username Data yang Akan Anda Cari > ";
+        cin >> cari;
+        int q;
+        for (q = 0; q < x; q++)
+        {
+            if (cari == member.username[q])
+            {
+
+                cout << "Username " << member.username[q] << " Ditemukan !!!" << endl;
+                cout << endl;
+            ifdta:
+                char pl;
+                cout << "Tampilkan Informasi Lengkap Data ? (y/n) => ";
+                cin >> pl;
+                if (pl == 'y' || pl == 'Y')
+                {
+                    cout << endl;
+                    cout << "Informasi Data Anda Saat Ini" << endl;
+                    cout << "Username       : " << member.username[q] << endl;
+                    cout << "Nama Member    : " << member.nama[q] << endl;
+                    cout << "Saldo Tabungan : " << member.tabungan[q] << endl;
+                    cout << "No. Identitas  : " << member.identity[q] << endl;
+                    cout << endl;
+                    system("pause");
+                    goto home;
+                }
+                else if (pl == 'n' || pl == 'N')
+                {
+                    system("pause");
+                    goto home;
+                }
+                else
+                {
+                    cout << "Inputan Anda Salah !!!, Inputkan (y/n)" << endl;
+                    system("pause");
+                    goto ifdta;
+                }
+                golek = true;
+            }
+        }
+        if (golek == false)
+        {
+            cout << "Username " << cari << "Tidak Ditemukan !!!" << endl;
+            system("pause");
+            goto home;
+        }
     }
     else if (pil == 9)
     {
         system("cls");
-        cout<<endl;
-        cout << "TERIMAKASIH";
+        cout << "|======================================================================================|\n";
+        cout << "|                                      Tentang                                         |\n";
+        cout << "|======================================================================================|\n";
+        cout << endl;
+        cout << "Aplikasi Ini Dibuat Oleh : " << endl;
+        cout << "1. Dika" << endl;
+        cout << "2. Ari" << endl;
+        cout << "3. Fahrudin" << endl;
+        cout << "4. Aji" << endl;
+        cout << "5. Ragil" << endl;
+        cout << "6. Reza" << endl;
+        cout << "7. Tirta" << endl;
+        cout << "8. Adil" << endl;
+        cout << "9. Akhid" << endl;
+        cout << endl;
+        cout << "|======================================================================================|\n";
+        system("pause");
+        goto home;
+    }
+    else if (pil == 10)
+    {
+        system("cls");
+        cout << endl;
+        cout << "+-+-+-+-+-+-+ +-+-+-+-+-+" << endl;
+        cout << "|T|e|r|i|m|a| |K|a|s|i|h|" << endl;
+        cout << "+-+-+-+-+-+-+ +-+-+-+-+-+" << endl;
+        cout << endl;
         system("pause");
         return 0;
     }
