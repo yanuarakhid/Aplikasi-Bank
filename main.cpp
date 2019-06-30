@@ -1,11 +1,10 @@
 /* Standard C++ includes */
 #include <iostream> // untu3k mendeklarasikan bahasa c++
-#include <iomanip>
-#include <ctime>   //Mengambil Lib Tangga
+#include <ctime>   //Mengambil Lib Tanggal , berkaitan dengan fungsi print struk
 #include <fstream> //untuk menerapkan varfile (akses file)
-#define MAX 100 //Mendefinisikan besar arayy untuk queue
+#define MAX 100 //Mendefinisikan besar daya tampung untuk queue
 
-using namespace std;
+using namespace std; //agar bisa menggunakan fungsi cout dan cin endl, tanpa std::cout;
 /*
 Judul FP    : Aplikasi Perbankan 
 Materi      :
@@ -27,11 +26,14 @@ Aplikasi Dibuat Oleh :
 9. Akhid
 */
 
-//global Scope Variabel
+
+/*global Scope Variabel, kenapa 4? karena mula2 kita ada 4 data juga, nanti x ini 
+menjadi fleksibel bisa kurang atau tambah nilainya, tetapi jika program di close akan kembali
+menjadi seperti semula yaitu 4, beda cerita kalau pake db :)  */
 int x = 4, indt, pil;
 
 
-//Tempat Menampung Data
+//Tempat Menampung Data Member Bank Dan Informasi Lain.
 struct data
 {
     string username[100] = {"susilopwr", "Ahmadtnj", "makmur34", "riyadiaja"};
@@ -40,7 +42,7 @@ struct data
     float tabungan[100] = {20000, 50000, 30000, 80000};
 } member;
 
-//Struct Untuk Queue
+//Struct Untuk menampung data Queue
 struct antrian
 {
     int data[MAX];
@@ -52,7 +54,9 @@ void first()
 {
 	antri.awal = -1;
 	antri.akhir = -1;
-}
+}/*Pada Queue terdapat head dan tail dimana, head adalah awal dan tail adalah akhir, agar
+program Queue saat running pertama kali, memorynya dalam keadaan kosong maka perlu
+di set assignmentnya -1 */
 
 bool isfull()
 {
@@ -65,6 +69,7 @@ bool isfull()
 		return false;
 	}
 }
+
 bool isempty()
 {
 	if(antri.akhir == -1)
@@ -76,6 +81,13 @@ bool isempty()
 		return false;
 	}
 }
+
+int a=0;//pemberian nilai awal antrian, kenapa 0 ? karena nanti akan ditambah 1++
+int tambah(){
+    return ++a;
+}/*Membuat Fungsi Otomatis Pada Queue agar tidak perlu menginputkan
+dan akan bertambah */
+
 void tampilkanantrian()
 {
 	if(!isempty())
@@ -85,13 +97,14 @@ void tampilkanantrian()
 		{
 			cout<<antri.data[ant]<<" | ";
 		}
+        cout <<endl;
 	}else{
-        
+        a=0; // reset nilai a kembali ke 0
 		cout<<"STATUS SAAT INI : "<<endl<<endl;
 		cout<<"UNTUK SAAT INI TIDAK ADA ANTRIAN"<<endl;
 	}
 	cout<<endl;
-}
+}/*Fungsi Untuk Menampilkan Queue */
 
 void ambilantrian()
 {
@@ -99,45 +112,50 @@ void ambilantrian()
 	float total;
 	if(!isfull())
 	{
-		cout<<"Masukan Nomer Antrian : ";
-		cin>>nomer;
-		cout<<"data berhasil ditambah"<<endl<<endl;
-		antri.data[antri.akhir] = nomer;
+        cout<<endl;
+		cout<<"Nomer Antrian Telah Diambil, Mohon Menunggu Nomer Antrian Anda di Panggil"<<endl<<endl;
+		antri.data[antri.akhir] = tambah();
 		total = total + antri.data[antri.akhir];
 		antri.akhir++;
+        system("pause");
 	}
 	else
 	{
 		cout<<"Antrian penuh"<<endl<<endl;
 	}
-}
+}/*Fungsi Untuk Mengambil Antrian */
 
 void format()
 {
 	antri.awal = -1;
 	antri.akhir = -1;
+    a=0;//reset nila a menjadi 0 lagi.
 	cout<<"Antrian Berhasil Dikosongkan..."<<endl<<endl;
-}
+}//Fungsi Untuk Format/mengosongkan seluruh queue
 
 void panggilantrian()
 {
 	if(!isempty())
 	{
-		cout<<"mengambil data "<<antri.data[antri.awal]<<endl;
+        cout <<endl;
+		cout<<"Silakan Nomer Antrian Ke - "<<antri.data[antri.awal]<<" Untuk Menuju Ke Teller/CS"<<endl;
 		for(int i=antri.awal; i<antri.akhir; i++)
 		{
 			antri.data[i]=antri.data[i+1];
 		}
 		antri.akhir--;
-		cout<<"data berhasil dihapus"<<endl<<endl;
+        cout<<endl;
+		system("pause");
 	}
 	else
 	{
-		cout<<"Queue kosong"<<endl<<endl;
+        cout<<endl;
+		cout<<"Untuk Saat Ini Tidak Ada Antrian"<<endl<<endl;
+        system("pause");
 	}
-}
+}/*Fungsi Untuk memanggil antrian (dequeue) ingat metode queue adalah FIFO */
 
-// Fungsi Dashborad Menu
+// Fungsi Menampilkan Dashborad Menu
 void header()
 {
     
@@ -166,12 +184,12 @@ void header()
 int main()
 {
 home:
-    header(); //Pemanggilan Menu
-    cout << "INPUT PILIHAN =>> ";
+    header(); //Pemanggilan Tampilan Dashboard Menu
+    cout << "INPUT PILIHAN =>> ";//Tempat Input Pilihan Menu
     cin >> pil;
     if (pil == 1)
     {
-    ant:
+    ant://label
         system("cls");
         cout << "|======================================================================================|\n";
         cout << "|                                          Antrian                                     |\n";
@@ -234,19 +252,18 @@ home:
         cin >> sort;
         if (sort == 1)
         {
-            //deklarasi tampungan array untuk sort
+            //deklarasi tampungan array untuk sorting, mengapa ada array lagi? agar array utama tidak berubah.
             string copynama[100], copyusername[100], copyidentity[100], tempnama, tempusername, tempidentity;
             float copytabungan[100], temptabungan;
             int f, g, u, r;
             int h = x;
-            //mengcopy array utama ke array khusus sorting
             for (f = 0; f < x; f++)
             {
                 copynama[f] = member.nama[f];
                 copyusername[f] = member.username[f];
                 copyidentity[f] = member.identity[f];
                 copytabungan[f] = member.tabungan[f];
-            }
+            }//mengcopy array utama ke array khusus sorting
             for (g = 0; g < h; g++)
             {
                 u = g;
@@ -272,7 +289,7 @@ home:
                 temptabungan = copytabungan[g];
                 copytabungan[g] = copytabungan[u];
                 copytabungan[u] = temptabungan;
-            }
+            }//Lopping Untuk Sorting Data.
             cout << endl;
             cout << "|======================================================================================|\n";
             cout << "|                           Data Terurut Dengan Mode Ascending (A-Z)                   |\n";
@@ -283,7 +300,7 @@ home:
             {
                 cout << ur + 1 << "."
                      << "\t" << copyusername[ur] << "\t" << copynama[ur] << "\t\t" << copyidentity[ur] << "\t\t\tRp. " << copytabungan[ur]<< endl;
-            }
+            }//Menampilkan Data yang sudah Ter Sort
             cout << endl;
             cout << "|======================================================================================|\n";
             system("pause");
@@ -310,7 +327,7 @@ home:
     }
     else if (pil == 3)
     {
-        system("cls");
+        system("cls");//Menu Tambah Member
         cout << "|======================================================================================|\n";
         cout << "|                                      Menu Tambah Member                              |\n";
         cout << "|======================================================================================|\n";
@@ -330,8 +347,7 @@ home:
             cout << "Buat Username  : ";
             cin >> member.username[x];
             cout << endl;
-        }
-        //update x variable
+        }//update global x variable
         x = (x + indt) - indt;
         cout << "Data Berhasil Di INputkan !!!" << endl;
         cout << endl;
@@ -687,7 +703,7 @@ home:
         }
         if (golek == false)
         {
-            cout << "Username " << cari << "Tidak Ditemukan !!!" << endl;
+            cout << "Username " << cari << " Tidak Ditemukan !!!" << endl;
             system("pause");
             goto home;
         }
@@ -710,6 +726,13 @@ home:
         cout << "8. Adil" << endl;
         cout << "9. Akhid" << endl;
         cout << endl;
+        cout << "Aplikasi Ini Dibuat untuk memenuhi tugas struktur data "<<endl;
+        cout << "Serta Masih Banyak kekurangan yang terdapat dalam aplikasi ini "<<endl;
+        cout << "Oleh Karena itu siapapun Boleh mengedit, menambah atau" <<endl;
+        cout <<"menghapus fitur yang sudah ada dengan tujuan yang lebih baik "<<endl;
+        cout<<endl;
+        cout<< "https://github.com/yanuarakhid/Aplikasi-Bank"<<endl;
+        cout<<endl;
         cout << "|======================================================================================|\n";
         system("pause");
         goto home;
