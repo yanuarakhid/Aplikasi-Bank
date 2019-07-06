@@ -13,7 +13,6 @@ b. Struct
 c. Sorting
 d. Searching
 e. Queue
-
 Aplikasi Dibuat Oleh : 
 1. Dika
 2. Ari
@@ -30,7 +29,7 @@ Aplikasi Dibuat Oleh :
 /*global Scope Variabel, kenapa 4? karena mula2 kita ada 4 data juga, nanti x ini 
 menjadi fleksibel bisa kurang atau tambah nilainya, tetapi jika program di close akan kembali
 menjadi seperti semula yaitu 4, beda cerita kalau pake db :)  */
-int x = 4, indt, pil;
+int x = 4,indt, pil;
 
 
 //Tempat Menampung Data Member Bank Dan Informasi Lain.
@@ -203,7 +202,7 @@ home:
         cout << endl;
         tampilkanantrian();
         int antr;
-        cout << "Masukan Pilihan Anda [1/2/3] > ";
+        cout << "Masukan Pilihan Anda [1/2/3/4] > ";
         cin >> antr;
         if (antr == 1){
             ambilantrian();
@@ -304,13 +303,63 @@ home:
             cout << endl;
             cout << "|======================================================================================|\n";
             system("pause");
-            goto home;
+            goto sor;
         }
         else if (sort == 2)
         {
-            cout << "fitur belum ada" << endl;
+             //deklarasi tampungan array untuk sorting, mengapa ada array lagi? agar array utama tidak berubah.
+            string copynama[100], copyusername[100], copyidentity[100], tempnama, tempusername, tempidentity;
+            float copytabungan[100], temptabungan;
+            int f, g, u, r;
+            int h = x;
+            for (f = 0; f < x; f++)
+            {
+                copynama[f] = member.nama[f];
+                copyusername[f] = member.username[f];
+                copyidentity[f] = member.identity[f];
+                copytabungan[f] = member.tabungan[f];
+            }//mengcopy array utama ke array khusus sorting
+            for (g = 0; g < h; g++)
+            {
+                u = g;
+                for (r = g + 1; r < h; r++)
+                {
+                    if (copynama[r] > copynama[u])
+                    {
+                        u = r;
+                    }
+                }
+                tempnama = copynama[g];
+                copynama[g] = copynama[u];
+                copynama[u] = tempnama;
+
+                tempusername = copyusername[g];
+                copyusername[g] = copyusername[u];
+                copyusername[u] = tempusername;
+
+                tempidentity = copyidentity[g];
+                copyidentity[g] = copyidentity[u];
+                copyidentity[u] = tempidentity;
+
+                temptabungan = copytabungan[g];
+                copytabungan[g] = copytabungan[u];
+                copytabungan[u] = temptabungan;
+            }//Lopping Untuk Sorting Data.
+            cout << endl;
+            cout << "|======================================================================================|\n";
+            cout << "|                           Data Terurut Dengan Mode Ascending (Z-A)                   |\n";
+            cout << "|======================================================================================|\n";
+            cout << endl;
+            cout << "NO.\tUSERNAME\tNAMA MEMBER\t\tNo.Identitas\t\tSaldo" << endl;
+            for (int ur = 0; ur < x; ur++)
+            {
+                cout << ur + 1 << "."
+                     << "\t" << copyusername[ur] << "\t" << copynama[ur] << "\t\t" << copyidentity[ur] << "\t\t\tRp. " << copytabungan[ur]<< endl;
+            }//Menampilkan Data yang sudah Ter Sort
+            cout << endl;
+            cout << "|======================================================================================|\n";
             system("pause");
-            goto home;
+            goto sor;
         }
         else if (sort == 3)
         {
@@ -356,6 +405,7 @@ home:
     }
     else if (pil == 4)
     {
+    mbalik:
         system("cls");
         cout << "|======================================================================================|\n";
         cout << "|                                   Menu Edit Data Member                              |\n";
@@ -373,9 +423,9 @@ home:
         bool tabung = false;
         for (i = 0; i < x; i++)
         {
-            if (nm == member.username[i])
-            {
-                cout << "Halo !!!, " << member.username[i];
+		    if (nm == member.username[i])
+		    {
+		        cout << "Halo !!!, " << member.username[i];
                 cout << endl;
                 cout << "Informasi Data Anda Saat Ini" << endl;
                 cout << "Username       : " << member.username[i] << endl;
@@ -403,9 +453,13 @@ home:
                 }else {
                     cout<<"Inputan Yang anda Masukan Salah !!!, Inputkan (Y/N)"<<endl<<endl;
                     system("pause");
-
-                }
-            }
+					
+                }        
+			}else {
+				cout <<"Username Yang Anda Masukkan Salah pen!!!" <<endl;
+				system("pause");
+				goto mbalik;
+			}
         }
     }
     else if (pil == 5)
