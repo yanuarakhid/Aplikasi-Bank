@@ -13,6 +13,7 @@ b. Struct
 c. Sorting
 d. Searching
 e. Queue
+
 Aplikasi Dibuat Oleh : 
 1. Dika
 2. Ari
@@ -35,10 +36,10 @@ int x = 4,indt, pil;
 //Tempat Menampung Data Member Bank Dan Informasi Lain.
 struct data
 {
-    string username[100] = {"susilopwr", "Ahmadtnj", "makmur34", "riyadiaja"};
+    string username[100] = {"susilopwr", "ahmadtnj", "makmur34", "riyadiaja"};
     string nama[100] = {"Susilo Pawiro", "Ahmad Tanjung", "Makmur Abadi", "Slamet Riyadi"};
     string identity[100] = {"3131313", "131311", "312132", "123212"};
-    float tabungan[100] = {20000, 50000, 30000, 80000};
+    float tabungan[100] = {70000, 80000, 50000, 90000};
 } member;
 
 //Struct Untuk menampung data Queue
@@ -231,12 +232,12 @@ home:
         cout << "|                                      List Member Bank                                |\n";
         cout << "|======================================================================================|\n";
         cout << endl;
-        cout << "NO.\tUSERNAME\tNAMA MEMBER\t\tNo.Identitas\t\tSaldo" << endl;
+        cout << "NO.\tUSERNAME\tNAMA MEMBER\t\t\tNo.Identitas\t\tSaldo" << endl;
         int i;
         for (i = 0; i < x; i++)
         {
             cout << i + 1 << "."
-                 << "\t" << member.username[i] << "\t" << member.nama[i] << "\t\t" << member.identity[i] << "\t\t\tRp. " << member.tabungan[i]<< endl;
+                 << "\t" << member.username[i] << "\t" << member.nama[i] << "\t\t\t" << member.identity[i] << "\t\t\tRp. " << member.tabungan[i]<< endl;
         }
         cout << endl;
         cout << "|======================================================================================|\n";
@@ -294,11 +295,11 @@ home:
             cout << "|                           Data Terurut Dengan Mode Ascending (A-Z)                   |\n";
             cout << "|======================================================================================|\n";
             cout << endl;
-            cout << "NO.\tUSERNAME\tNAMA MEMBER\t\tNo.Identitas\t\tSaldo" << endl;
+            cout << "NO.\tUSERNAME\tNAMA MEMBER\t\t\tNo.Identitas\t\tSaldo" << endl;
             for (int ur = 0; ur < x; ur++)
             {
                 cout << ur + 1 << "."
-                     << "\t" << copyusername[ur] << "\t" << copynama[ur] << "\t\t" << copyidentity[ur] << "\t\t\tRp. " << copytabungan[ur]<< endl;
+                     << "\t" << copyusername[ur] << "\t" << copynama[ur] << "\t\t\t" << copyidentity[ur] << "\t\t\tRp. " << copytabungan[ur]<< endl;
             }//Menampilkan Data yang sudah Ter Sort
             cout << endl;
             cout << "|======================================================================================|\n";
@@ -347,14 +348,14 @@ home:
             }//Lopping Untuk Sorting Data.
             cout << endl;
             cout << "|======================================================================================|\n";
-            cout << "|                           Data Terurut Dengan Mode Ascending (Z-A)                   |\n";
+            cout << "|                           Data Terurut Dengan Mode Descending (Z-A)                   |\n";
             cout << "|======================================================================================|\n";
             cout << endl;
-            cout << "NO.\tUSERNAME\tNAMA MEMBER\t\tNo.Identitas\t\tSaldo" << endl;
+            cout << "NO.\tUSERNAME\tNAMA MEMBER\t\t\tNo.Identitas\t\tSaldo" << endl;
             for (int ur = 0; ur < x; ur++)
             {
                 cout << ur + 1 << "."
-                     << "\t" << copyusername[ur] << "\t" << copynama[ur] << "\t\t" << copyidentity[ur] << "\t\t\tRp. " << copytabungan[ur]<< endl;
+                     << "\t" << copyusername[ur] << "\t" << copynama[ur] << "\t\t\t" << copyidentity[ur] << "\t\t\tRp. " << copytabungan[ur]<< endl;
             }//Menampilkan Data yang sudah Ter Sort
             cout << endl;
             cout << "|======================================================================================|\n";
@@ -387,13 +388,14 @@ home:
         for (x; x < indt + b; x++)
         {
             cout << "Masukan Data Member ke - " << x + 1 << endl;
-            cout << "InpUt Nama     : ";
-            cin >> member.nama[x];
-            cout << "No. Identitas  : ";
+            cout << "InpUt Nama Lengkap : ";
+            cin.ignore();
+            getline(cin, member.nama[x]);
+            cout << "No. Identitas      : ";
             cin >> member.identity[x];
-            cout << "Tabungan Awal  : Rp. ";
+            cout << "Tabungan Awal      : Rp. ";
             cin >> member.tabungan[x];
-            cout << "Buat Username  : ";
+            cout << "Buat Username      : ";
             cin >> member.username[x];
             cout << endl;
         }//update global x variable
@@ -619,6 +621,7 @@ home:
         {
             if (tarik == member.username[i])
             {
+                take = true;
                 cout << "Halo !!!, " << member.username[i];
                 cout << endl;
                 cout << "Informasi Data Anda Saat Ini" << endl;
@@ -630,7 +633,7 @@ home:
                 float baru;
                 cout << "Masukan Jumlah Uang yang akan diambil = Rp. ";
                 cin >> baru;
-                if (baru > member.tabungan[i])
+                if (baru >= member.tabungan[i])
                 {
                     cout << "Maaf, Saldo Anda Tidak Mencukupi Untuk Melakukan Penarikan !!!" << endl;
                     system("pause");
@@ -639,7 +642,6 @@ home:
                 else if (baru < member.tabungan[i])
                 {
                     member.tabungan[i] = member.tabungan[i] - baru;
-                    take = true;
                     cout << endl;
                     cout << "Berhasil Melakukan Penarikan Uang !!! " << endl;
                     cout << endl;
