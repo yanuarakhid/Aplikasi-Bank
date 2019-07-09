@@ -1,5 +1,5 @@
 /* Standard C++ includes */
-#include <iostream> // untu3k mendeklarasikan bahasa c++
+#include <iostream> // untuk mendeklarasikan bahasa c++
 #include <ctime>   //Mengambil Lib Tanggal , berkaitan dengan fungsi print struk
 #include <fstream> //untuk menerapkan varfile (akses file)
 #define MAX 100 //Mendefinisikan besar daya tampung untuk queue
@@ -82,9 +82,9 @@ bool isempty()
 	}
 }
 
-int a=0;//pemberian nilai awal antrian, kenapa 0 ? karena nanti akan ditambah 1++
+int a=1;//pemberian nilai awal antrian, kenapa 0 ? karena nanti akan ditambah 1++
 int tambah(){
-    return ++a;
+    return a++;
 }/*Membuat Fungsi Otomatis Pada Queue agar tidak perlu menginputkan
 dan akan bertambah */
 
@@ -99,7 +99,7 @@ void tampilkanantrian()
 		}
         cout <<endl;
 	}else{
-        a=0; // reset nilai a kembali ke 0
+        a=1; // reset nilai a kembali ke 0
 		cout<<"STATUS SAAT INI : "<<endl<<endl;
 		cout<<"UNTUK SAAT INI TIDAK ADA ANTRIAN"<<endl;
 	}
@@ -384,7 +384,11 @@ home:
         cout << endl;
         cout << "Berapa Jumlah Data yang akan Anda Inputkan > ";
         cin >> indt;
+        //B= 4;
         int b = x;
+
+        //++//INCREMENT
+        //--//DECR
         for (x; x < indt + b; x++)
         {
             cout << "Masukan Data Member ke - " << x + 1 << endl;
@@ -398,8 +402,10 @@ home:
             cout << "Buat Username      : ";
             cin >> member.username[x];
             cout << endl;
-        }//update global x variable
+        }
+        //update global x variable
         x = (x + indt) - indt;
+        //x=x;
         cout << "Data Berhasil Di INputkan !!!" << endl;
         cout << endl;
         system("pause");
@@ -414,6 +420,7 @@ home:
         cout << "|======================================================================================|\n";
         cout << "NO.\tUsername" << endl;
         int i;
+        bool edit = false;
         for (i = 0; i < x; i++)
         {
             cout << i + 1 << "\t" << member.username[i] << endl;
@@ -422,11 +429,11 @@ home:
         string nm;
         cout << "Untuk Edit Data Input Username Member = ";
         cin >> nm;
-        bool tabung = false;
         for (i = 0; i < x; i++)
         {
 		    if (nm == member.username[i])
 		    {
+                edit = true;
 		        cout << "Halo !!!, " << member.username[i];
                 cout << endl;
                 cout << "Informasi Data Anda Saat Ini" << endl;
@@ -436,11 +443,13 @@ home:
                 cout << "No. Identitas  : " << member.identity[i] << endl;
                 cout << endl;
                 char pila;
+                ehe:
                 cout<<"Apakah Anda Yakin Ingin Mengubah Data Tersebut ? (Y/N) =>> ";cin>>pila;
                 if (pila=='y'||pila=='Y'){
                     cout << "Ubah Data member " << member.username[i] << endl;
                     cout << "Ubah Nama          : ";
-                    cin >> member.nama[i];
+                    cin.ignore();
+                    getline(cin, member.nama[i]);
                     cout << "Ubah no Identitas  : ";
                     cin >> member.identity[i];
                     cout << "Ubah Username      : ";
@@ -455,14 +464,15 @@ home:
                 }else {
                     cout<<"Inputan Yang anda Masukan Salah !!!, Inputkan (Y/N)"<<endl<<endl;
                     system("pause");
-					
+					goto ehe;
                 }        
-			}else {
-				cout <<"Username Yang Anda Masukkan Salah pen!!!" <<endl;
+			} 
+        }
+        if (edit == false){
+				cout <<"Username Yang Anda Masukkan Tidak Ada!!!" <<endl;
 				system("pause");
 				goto mbalik;
 			}
-        }
     }
     else if (pil == 5)
     {
@@ -506,7 +516,7 @@ home:
                 {
                     for (int k = j /* dimulai dari index nilai yang ditemukan */; k < x; k++)
                     {
-                        //Menggeser niali data pada index array sampai jumlah maksimal data array
+                        //Menggeser nilai data pada index array sampai jumlah maksimal data array
                         member.username[k] /* Nilai index saat ini */ = member.username[k + 1] /* Nilai index selanjutnya */;
                         member.nama[k] /* Nilai index saat ini */ = member.nama[k + 1] /* Nilai index selanjutnya */;
                         member.identity[k] /* Nilai index saat ini */ = member.identity[k + 1] /* Nilai index selanjutnya */;
@@ -581,10 +591,12 @@ home:
                 cout << "Berhasil Menambahkan Saldo Ke Akun Anda !!! " << endl;
                 //revisi
                 cout << endl;
-                for (i = 0; i < x; i++)
-                {
-                    cout << i + 1 << "\t" << member.username[i] << "\t\t" << member.nama[i] << "\t\t" << member.identity[i] << "\t\t\tRp. " << member.tabungan[i] << endl;
-                }
+                cout << "Informasi Data Anda Saat Ini" << endl;
+                cout << "Username       : " << member.username[i] << endl;
+                cout << "Nama Member    : " << member.nama[i] << endl;
+                cout << "Saldo Tabungan : " << member.tabungan[i] << endl;
+                cout << "No. Identitas  : " << member.identity[i] << endl;
+                cout << endl;
                 system("pause");
                 goto home;
             }
@@ -657,9 +669,12 @@ home:
                     cin >> ps;
                     if (ps == 'y' || ps == 'Y')
                     {
+                        //fungsi untuk mengambil tanggal dan waktu saat ini
                         time_t now = time(0);
                         char* dt = ctime(&now);
                         //cout << << endl;
+                        
+                        //fungsi create file struk.txt
                         ofstream struk;
                         struk.open("struk.txt");
                         struk<<"==================================================\n";
