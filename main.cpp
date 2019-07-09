@@ -10,20 +10,20 @@ Judul FP    : Aplikasi Perbankan
 Materi      :
 a. Array
 b. Struct
-c. Sorting
-d. Searching
+c. Sorting (Selection) 
+d. Search (Squential search)
 e. Queue
 
 Aplikasi Dibuat Oleh : 
-1. Dika
-2. Ari
-3. Fahrudin
-4. AJi
-5. Ragil
-6. Reza
-7. Tirta
-8. Adil
-9. Akhid
+1. Dika (18.11.2059)
+2. Ari (18.11.2075)
+3. Fahrudin (18.11.2087)
+4. AJi (18.11.2042)
+5. Ragil (18.11.2038)
+6. Reza (18.11.2063)
+7. Tirta (18.11.2060)
+8. Adil  (18.11.2043)
+9. Akhid (18.11.2065)
 */
 
 
@@ -82,7 +82,7 @@ bool isempty()
 	}
 }
 
-int a=1;//pemberian nilai awal antrian, kenapa 0 ? karena nanti akan ditambah 1++
+int a=1;//pemberian nilai awal antrian, kenapa 1 ? karena nanti akan ditambah 1++
 int tambah(){
     return a++;
 }/*Membuat Fungsi Otomatis Pada Queue agar tidak perlu menginputkan
@@ -129,7 +129,7 @@ void format()
 {
 	antri.awal = -1;
 	antri.akhir = -1;
-    a=0;//reset nila a menjadi 0 lagi.
+    a=1;//reset nila a menjadi 0 lagi.
 	cout<<"Antrian Berhasil Dikosongkan..."<<endl<<endl;
 }//Fungsi Untuk Format/mengosongkan seluruh queue
 
@@ -162,7 +162,7 @@ void header()
     system("cls");
     cout << "========================================================\n";
     cout << "                   WELCOME ADMIN !!!\n";
-    cout << "                      PT. JAJAL WAE    \n";
+    cout << "              PT. BANK PLECIT MAKMUR JAYA \n";
     cout << endl;
     cout << "            Aplikasi Perbankan Version 1.0   " << endl;
     cout << "========================================================\n";
@@ -175,7 +175,7 @@ void header()
     cout << "[6] Menabung" << endl;
     cout << "[7] Penarikan" << endl;
     cout << "[8] Pencarian Data" << endl;
-    cout << "[9] Tentang Kami" << endl;
+    cout << "[9] About Us" << endl;
     cout << "[10] Keluar" << endl;
     cout << endl;
 }
@@ -783,7 +783,7 @@ home:
     {
         system("cls");
         cout << "|======================================================================================|\n";
-        cout << "|                                      Tentang                                         |\n";
+        cout << "|                                      About Us                                        |\n";
         cout << "|======================================================================================|\n";
         cout << endl;
         cout << "Aplikasi Ini Dibuat Oleh : " << endl;
