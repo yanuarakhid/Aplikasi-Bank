@@ -6,7 +6,7 @@
 - Struct
 - Sorting (Selection Sort)
 - Searching (Squential Search)
-- Queue **
+- Queue
 
 #### Aplikasi Dibuat dan Dikembangan Oleh : 
 
