@@ -1,8 +1,8 @@
 /* Standard C++ includes */
 #include <iostream> // untuk mendeklarasikan bahasa c++
-#include <ctime>   //Mengambil Lib Tanggal , berkaitan dengan fungsi print struk
-#include <fstream> //untuk menerapkan varfile (akses file)
-#define MAX 100 //Mendefinisikan besar daya tampung untuk queue
+#include <ctime>    //Mengambil Lib Tanggal , berkaitan dengan fungsi print struk
+#include <fstream>  //untuk menerapkan varfile (akses file)
+#define MAX 100     //Mendefinisikan besar daya tampung untuk queue
 
 using namespace std; //agar bisa menggunakan fungsi cout dan cin endl, tanpa std::cout;
 /*
@@ -15,23 +15,21 @@ d. Search (Squential search)
 e. Queue
 
 Aplikasi Dibuat Oleh : 
-1. Dika (18.11.2059)
-2. Ari (18.11.2075)
-3. Fahrudin (18.11.2087)
-4. AJi (18.11.2042)
-5. Ragil (18.11.2038)
-6. Reza (18.11.2063)
-7. Tirta (18.11.2060)
-8. Adil  (18.11.2043)
-9. Akhid (18.11.2065)
+- RAGIL SUSILO PUTRO	            (18.11.2038)
+- AJI SAPUTRO		                (18.11.2042)
+- MIFTAHUL FADILLA	                (18.11.2043)
+- ANDHIKA PUTRATAMA	                (18.11.2059)
+- MUHAMMAD TIRTA ADI PUTRA UTAMA	(18.11.2060)
+- NINDRA REZA		                (18.11.2063)
+- AKHID YANUAR AL-FIKRI	            (18.11.2065)
+- M ARI GUNAWAN		                (18.11.2075)
+- FACHRUDIN EFFENDI	                (18.11.2087)
 */
-
 
 /*global Scope Variabel, kenapa 4? karena mula2 kita ada 4 data juga, nanti x ini 
 menjadi fleksibel bisa kurang atau tambah nilainya, tetapi jika program di close akan kembali
 menjadi seperti semula yaitu 4, beda cerita kalau pake db :)  */
-int x = 4,indt, pil;
-
+int x = 4, indt, pil;
 
 //Tempat Menampung Data Member Bank Dan Informasi Lain.
 struct data
@@ -46,119 +44,127 @@ struct data
 struct antrian
 {
     int data[MAX];
-    int awal,akhir;
-}antri;
-
+    int awal, akhir;
+} antri;
 
 void first()
 {
-	antri.awal = -1;
-	antri.akhir = -1;
-}/*Pada Queue terdapat head dan tail dimana, head adalah awal dan tail adalah akhir, agar
+    antri.awal = -1;
+    antri.akhir = -1;
+} /*Pada Queue terdapat head dan tail dimana, head adalah awal dan tail adalah akhir, agar
 program Queue saat running pertama kali, memorynya dalam keadaan kosong maka perlu
 di set assignmentnya -1 */
 
 bool isfull()
 {
-	if(antri.akhir == MAX-1)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (antri.akhir == MAX - 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 bool isempty()
 {
-	if(antri.akhir == -1)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (antri.akhir == -1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-int a=1;//pemberian nilai awal antrian, kenapa 1 ? karena nanti akan ditambah 1++
-int tambah(){
+int a = 1; //pemberian nilai awal antrian, kenapa 1 ? karena nanti akan ditambah 1++
+int tambah()
+{
     return a++;
-}/*Membuat Fungsi Otomatis Pada Queue agar tidak perlu menginputkan
+} /*Membuat Fungsi Otomatis Pada Queue agar tidak perlu menginputkan
 dan akan bertambah */
 
 void tampilkanantrian()
 {
-	if(!isempty())
-	{
-        cout<<"STATUS SAAT INI : "<<endl<<endl;
-		for(int ant=antri.awal; ant<antri.akhir; ant++)
-		{
-			cout<<antri.data[ant]<<" | ";
-		}
-        cout <<endl;
-	}else{
-        a=1; // reset nilai a kembali ke 0
-		cout<<"STATUS SAAT INI : "<<endl<<endl;
-		cout<<"UNTUK SAAT INI TIDAK ADA ANTRIAN"<<endl;
-	}
-	cout<<endl;
-}/*Fungsi Untuk Menampilkan Queue */
+    if (!isempty())
+    {
+        cout << "STATUS SAAT INI : " << endl
+             << endl;
+        for (int ant = antri.awal; ant < antri.akhir; ant++)
+        {
+            cout << antri.data[ant] << " | ";
+        }
+        cout << endl;
+    }
+    else
+    {
+        a = 1; // reset nilai a kembali ke 0
+        cout << "STATUS SAAT INI : " << endl
+             << endl;
+        cout << "UNTUK SAAT INI TIDAK ADA ANTRIAN" << endl;
+    }
+    cout << endl;
+} /*Fungsi Untuk Menampilkan Queue */
 
 void ambilantrian()
 {
-	int nomer;
-	float total;
-	if(!isfull())
-	{
-        cout<<endl;
-		cout<<"Nomer Antrian Telah Diambil, Mohon Menunggu Nomer Antrian Anda di Panggil"<<endl<<endl;
-		antri.data[antri.akhir] = tambah();
-		total = total + antri.data[antri.akhir];
-		antri.akhir++;
+    int nomer;
+    float total;
+    if (!isfull())
+    {
+        cout << endl;
+        cout << "Nomer Antrian Telah Diambil, Mohon Menunggu Nomer Antrian Anda di Panggil" << endl
+             << endl;
+        antri.data[antri.akhir] = tambah();
+        total = total + antri.data[antri.akhir];
+        antri.akhir++;
         system("pause");
-	}
-	else
-	{
-		cout<<"Antrian penuh"<<endl<<endl;
-	}
-}/*Fungsi Untuk Mengambil Antrian */
+    }
+    else
+    {
+        cout << "Antrian penuh" << endl
+             << endl;
+    }
+} /*Fungsi Untuk Mengambil Antrian */
 
 void format()
 {
-	antri.awal = -1;
-	antri.akhir = -1;
-    a=1;//reset nila a menjadi 0 lagi.
-	cout<<"Antrian Berhasil Dikosongkan..."<<endl<<endl;
-}//Fungsi Untuk Format/mengosongkan seluruh queue
+    antri.awal = -1;
+    antri.akhir = -1;
+    a = 1; //reset nila a menjadi 0 lagi.
+    cout << "Antrian Berhasil Dikosongkan..." << endl
+         << endl;
+} //Fungsi Untuk Format/mengosongkan seluruh queue
 
 void panggilantrian()
 {
-	if(!isempty())
-	{
-        cout <<endl;
-		cout<<"Silakan Nomer Antrian Ke - "<<antri.data[antri.awal]<<" Untuk Menuju Ke Teller/CS"<<endl;
-		for(int i=antri.awal; i<antri.akhir; i++)
-		{
-			antri.data[i]=antri.data[i+1];
-		}
-		antri.akhir--;
-        cout<<endl;
-		system("pause");
-	}
-	else
-	{
-        cout<<endl;
-		cout<<"Untuk Saat Ini Tidak Ada Antrian"<<endl<<endl;
+    if (!isempty())
+    {
+        cout << endl;
+        cout << "Silakan Nomer Antrian Ke - " << antri.data[antri.awal] << " Untuk Menuju Ke Teller/CS" << endl;
+        for (int i = antri.awal; i < antri.akhir; i++)
+        {
+            antri.data[i] = antri.data[i + 1];
+        }
+        antri.akhir--;
+        cout << endl;
         system("pause");
-	}
-}/*Fungsi Untuk memanggil antrian (dequeue) ingat metode queue adalah FIFO */
+    }
+    else
+    {
+        cout << endl;
+        cout << "Untuk Saat Ini Tidak Ada Antrian" << endl
+             << endl;
+        system("pause");
+    }
+} /*Fungsi Untuk memanggil antrian (dequeue) ingat metode queue adalah FIFO */
 
 // Fungsi Menampilkan Dashborad Menu
 void header()
 {
-    
+
     system("cls");
     cout << "========================================================\n";
     cout << "                   WELCOME ADMIN !!!\n";
@@ -184,12 +190,12 @@ void header()
 int main()
 {
 home:
-    header(); //Pemanggilan Tampilan Dashboard Menu
-    cout << "INPUT PILIHAN =>> ";//Tempat Input Pilihan Menu
+    header();                     //Pemanggilan Tampilan Dashboard Menu
+    cout << "INPUT PILIHAN =>> "; //Tempat Input Pilihan Menu
     cin >> pil;
     if (pil == 1)
     {
-    ant://label
+    ant: //label
         system("cls");
         cout << "|======================================================================================|\n";
         cout << "|                                          Antrian                                     |\n";
@@ -205,16 +211,23 @@ home:
         int antr;
         cout << "Masukan Pilihan Anda [1/2/3/4] > ";
         cin >> antr;
-        if (antr == 1){
+        if (antr == 1)
+        {
             ambilantrian();
             goto ant;
-        }else if (antr == 2){
+        }
+        else if (antr == 2)
+        {
             panggilantrian();
             goto ant;
-        }else if (antr == 3){
+        }
+        else if (antr == 3)
+        {
             format();
             goto ant;
-        }else if (antr == 4){
+        }
+        else if (antr == 4)
+        {
             goto home;
         }
         else
@@ -237,7 +250,7 @@ home:
         for (i = 0; i < x; i++)
         {
             cout << i + 1 << "."
-                 << "\t" << member.username[i] << "\t" << member.nama[i] << "\t\t\t" << member.identity[i] << "\t\t\tRp. " << member.tabungan[i]<< endl;
+                 << "\t" << member.username[i] << "\t" << member.nama[i] << "\t\t\t" << member.identity[i] << "\t\t\tRp. " << member.tabungan[i] << endl;
         }
         cout << endl;
         cout << "|======================================================================================|\n";
@@ -263,7 +276,7 @@ home:
                 copyusername[f] = member.username[f];
                 copyidentity[f] = member.identity[f];
                 copytabungan[f] = member.tabungan[f];
-            }//mengcopy array utama ke array khusus sorting
+            } //mengcopy array utama ke array khusus sorting
             for (g = 0; g < h; g++)
             {
                 u = g;
@@ -289,7 +302,7 @@ home:
                 temptabungan = copytabungan[g];
                 copytabungan[g] = copytabungan[u];
                 copytabungan[u] = temptabungan;
-            }//Lopping Untuk Sorting Data.
+            } //Lopping Untuk Sorting Data.
             cout << endl;
             cout << "|======================================================================================|\n";
             cout << "|                           Data Terurut Dengan Mode Ascending (A-Z)                   |\n";
@@ -299,8 +312,8 @@ home:
             for (int ur = 0; ur < x; ur++)
             {
                 cout << ur + 1 << "."
-                     << "\t" << copyusername[ur] << "\t" << copynama[ur] << "\t\t\t" << copyidentity[ur] << "\t\t\tRp. " << copytabungan[ur]<< endl;
-            }//Menampilkan Data yang sudah Ter Sort
+                     << "\t" << copyusername[ur] << "\t" << copynama[ur] << "\t\t\t" << copyidentity[ur] << "\t\t\tRp. " << copytabungan[ur] << endl;
+            } //Menampilkan Data yang sudah Ter Sort
             cout << endl;
             cout << "|======================================================================================|\n";
             system("pause");
@@ -308,7 +321,7 @@ home:
         }
         else if (sort == 2)
         {
-             //deklarasi tampungan array untuk sorting, mengapa ada array lagi? agar array utama tidak berubah.
+            //deklarasi tampungan array untuk sorting, mengapa ada array lagi? agar array utama tidak berubah.
             string copynama[100], copyusername[100], copyidentity[100], tempnama, tempusername, tempidentity;
             float copytabungan[100], temptabungan;
             int f, g, u, r;
@@ -319,7 +332,7 @@ home:
                 copyusername[f] = member.username[f];
                 copyidentity[f] = member.identity[f];
                 copytabungan[f] = member.tabungan[f];
-            }//mengcopy array utama ke array khusus sorting
+            } //mengcopy array utama ke array khusus sorting
             for (g = 0; g < h; g++)
             {
                 u = g;
@@ -345,7 +358,7 @@ home:
                 temptabungan = copytabungan[g];
                 copytabungan[g] = copytabungan[u];
                 copytabungan[u] = temptabungan;
-            }//Lopping Untuk Sorting Data.
+            } //Lopping Untuk Sorting Data.
             cout << endl;
             cout << "|======================================================================================|\n";
             cout << "|                           Data Terurut Dengan Mode Descending (Z-A)                   |\n";
@@ -355,8 +368,8 @@ home:
             for (int ur = 0; ur < x; ur++)
             {
                 cout << ur + 1 << "."
-                     << "\t" << copyusername[ur] << "\t" << copynama[ur] << "\t\t\t" << copyidentity[ur] << "\t\t\tRp. " << copytabungan[ur]<< endl;
-            }//Menampilkan Data yang sudah Ter Sort
+                     << "\t" << copyusername[ur] << "\t" << copynama[ur] << "\t\t\t" << copyidentity[ur] << "\t\t\tRp. " << copytabungan[ur] << endl;
+            } //Menampilkan Data yang sudah Ter Sort
             cout << endl;
             cout << "|======================================================================================|\n";
             system("pause");
@@ -377,7 +390,7 @@ home:
     }
     else if (pil == 3)
     {
-        system("cls");//Menu Tambah Member
+        system("cls"); //Menu Tambah Member
         cout << "|======================================================================================|\n";
         cout << "|                                      Menu Tambah Member                              |\n";
         cout << "|======================================================================================|\n";
@@ -431,21 +444,23 @@ home:
         cin >> nm;
         for (i = 0; i < x; i++)
         {
-		    if (nm == member.username[i])
-		    {
+            if (nm == member.username[i])
+            {
                 edit = true;
-		        cout << "Halo !!!, " << member.username[i];
+                cout << "Halo !!!, " << member.username[i];
                 cout << endl;
                 cout << "Informasi Data Anda Saat Ini" << endl;
                 cout << "Username       : " << member.username[i] << endl;
                 cout << "Nama Member    : " << member.nama[i] << endl;
-                cout << "Saldo Tabungan : Rp. " << member.tabungan[i]<< endl;
+                cout << "Saldo Tabungan : Rp. " << member.tabungan[i] << endl;
                 cout << "No. Identitas  : " << member.identity[i] << endl;
                 cout << endl;
                 char pila;
-                ehe:
-                cout<<"Apakah Anda Yakin Ingin Mengubah Data Tersebut ? (Y/N) =>> ";cin>>pila;
-                if (pila=='y'||pila=='Y'){
+            ehe:
+                cout << "Apakah Anda Yakin Ingin Mengubah Data Tersebut ? (Y/N) =>> ";
+                cin >> pila;
+                if (pila == 'y' || pila == 'Y')
+                {
                     cout << "Ubah Data member " << member.username[i] << endl;
                     cout << "Ubah Nama          : ";
                     cin.ignore();
@@ -454,25 +469,31 @@ home:
                     cin >> member.identity[i];
                     cout << "Ubah Username      : ";
                     cin >> member.username[i];
-                    cout<<endl;
-                    cout<<"DATA BERHASIL DIUBAH !!!"<<endl;
+                    cout << endl;
+                    cout << "DATA BERHASIL DIUBAH !!!" << endl;
                     system("pause");
                     goto home;
-                }else if (pila=='n'||pila=='N'){
+                }
+                else if (pila == 'n' || pila == 'N')
+                {
                     system("pause");
                     goto home;
-                }else {
-                    cout<<"Inputan Yang anda Masukan Salah !!!, Inputkan (Y/N)"<<endl<<endl;
+                }
+                else
+                {
+                    cout << "Inputan Yang anda Masukan Salah !!!, Inputkan (Y/N)" << endl
+                         << endl;
                     system("pause");
-					goto ehe;
-                }        
-			} 
+                    goto ehe;
+                }
+            }
         }
-        if (edit == false){
-				cout <<"Username Yang Anda Masukkan Tidak Ada!!!" <<endl;
-				system("pause");
-				goto mbalik;
-			}
+        if (edit == false)
+        {
+            cout << "Username Yang Anda Masukkan Tidak Ada!!!" << endl;
+            system("pause");
+            goto mbalik;
+        }
     }
     else if (pil == 5)
     {
@@ -506,7 +527,7 @@ home:
                 cout << "Informasi Data Anda Saat Ini" << endl;
                 cout << "Username       : " << member.username[j] << endl;
                 cout << "Nama Member    : " << member.nama[j] << endl;
-                cout << "Saldo Tabungan : Rp. " << member.tabungan[j]<< endl;
+                cout << "Saldo Tabungan : Rp. " << member.tabungan[j] << endl;
                 cout << "No. Identitas  : " << member.identity[j] << endl;
                 cout << endl;
                 char hps;
@@ -639,7 +660,7 @@ home:
                 cout << "Informasi Data Anda Saat Ini" << endl;
                 cout << "Username       : " << member.username[i] << endl;
                 cout << "Nama Member    : " << member.nama[i] << endl;
-                cout << "Saldo Tabungan : Rp. " << member.tabungan[i]<< endl;
+                cout << "Saldo Tabungan : Rp. " << member.tabungan[i] << endl;
                 cout << "No. Identitas  : " << member.identity[i] << endl;
                 cout << endl;
                 float baru;
@@ -660,7 +681,7 @@ home:
                     cout << "Informasi Data Anda Saat Ini" << endl;
                     cout << "Username       : " << member.username[i] << endl;
                     cout << "Nama Member    : " << member.nama[i] << endl;
-                    cout << "Saldo Tabungan : Rp. " << member.tabungan[i]<< endl;
+                    cout << "Saldo Tabungan : Rp. " << member.tabungan[i] << endl;
                     cout << "No. Identitas  : " << member.identity[i] << endl;
                     cout << endl;
                 print:
@@ -671,23 +692,23 @@ home:
                     {
                         //fungsi untuk mengambil tanggal dan waktu saat ini
                         time_t now = time(0);
-                        char* dt = ctime(&now);
+                        char *dt = ctime(&now);
                         //cout << << endl;
-                        
+
                         //fungsi create file struk.txt
                         ofstream struk;
                         struk.open("struk.txt");
-                        struk<<"==================================================\n";
-                        struk<<"\t\tPT. BANK PLECIT MAKMUR JAYA\n";
-                        struk<<"\tWaktu Penarikan : " << dt;
-                        struk<<"==================================================\n";
-                        struk<<endl;
-                        struk << "Nama Member           : " << member.nama[i]<<"\n";
-                        struk << "Jumlah Uang Diambil   : Rp. " << baru<<"\n";
-                        struk << "Sisa Saldo Tabungan   : Rp. " << member.tabungan[i]<<"\n";
-                        struk<<endl;
-                        struk<<"=================================================\n";
-                        struk<<"\tTERIMAKASIH TELAH MELAKUKAN TRANSAKSI\n";  
+                        struk << "==================================================\n";
+                        struk << "\t\tPT. BANK PLECIT MAKMUR JAYA\n";
+                        struk << "\tWaktu Penarikan : " << dt;
+                        struk << "==================================================\n";
+                        struk << endl;
+                        struk << "Nama Member           : " << member.nama[i] << "\n";
+                        struk << "Jumlah Uang Diambil   : Rp. " << baru << "\n";
+                        struk << "Sisa Saldo Tabungan   : Rp. " << member.tabungan[i] << "\n";
+                        struk << endl;
+                        struk << "=================================================\n";
+                        struk << "\tTERIMAKASIH TELAH MELAKUKAN TRANSAKSI\n";
                         struk.close();
                         system("notepad.exe struk.txt");
                         system("pause");
@@ -787,23 +808,28 @@ home:
         cout << "|======================================================================================|\n";
         cout << endl;
         cout << "Aplikasi Ini Dibuat Oleh : " << endl;
-        cout << "1. Dika" << endl;
-        cout << "2. Ari" << endl;
-        cout << "3. Fahrudin" << endl;
-        cout << "4. Aji" << endl;
-        cout << "5. Ragil" << endl;
-        cout << "6. Reza" << endl;
-        cout << "7. Tirta" << endl;
-        cout << "8. Adil" << endl;
-        cout << "9. Akhid" << endl;
         cout << endl;
-        cout << "Aplikasi Ini Dibuat untuk memenuhi tugas struktur data "<<endl;
-        cout << "Serta Masih Banyak kekurangan yang terdapat dalam aplikasi ini "<<endl;
-        cout << "Oleh Karena itu siapapun Boleh mengedit, menambah atau" <<endl;
-        cout <<"menghapus fitur yang sudah ada dengan tujuan yang lebih baik "<<endl;
-        cout<<endl;
-        cout<< "https://github.com/yanuarakhid/Aplikasi-Bank"<<endl;
-        cout<<endl;
+        cout << "-----------------------------------------------------" << endl;
+        cout << "|              NAMA                    |    NIM     |" << endl;
+        cout << "-----------------------------------------------------" << endl;
+        cout << "| 1. RAGIL SUSILO PUTRO                 | 18.11.2038 |" << endl;
+        cout << "| 2. AJI SAPUTRO		        | 18.11.2042 |" << endl;
+        cout << "| 3. MIFTAHUL FADILLA	                | 18.11.2043 |" << endl;
+        cout << "| 4. ANDHIKA PUTRATAMA	                | 18.11.2059 |" << endl;
+        cout << "| 5. MUHAMMAD TIRTA ADI PUTRA UTAMA	| 18.11.2060 |" << endl;
+        cout << "| 6. NINDRA REZA		        | 18.11.2063 |" << endl;
+        cout << "| 7. AKHID YANUAR AL-FIKRI	        | 18.11.2065 |" << endl;
+        cout << "| 8. M ARI GUNAWAN		        | 18.11.2075 |" << endl;
+        cout << "| 9. FACHRUDIN EFFENDI	                | 18.11.2087 |" << endl;
+        cout << "-----------------------------------------------------" << endl;
+        cout << endl;
+        cout << "Aplikasi Ini Dibuat untuk memenuhi tugas struktur data " << endl;
+        cout << "Serta Masih Banyak kekurangan yang terdapat dalam aplikasi ini " << endl;
+        cout << "Oleh Karena itu siapapun Boleh mengedit, menambah atau" << endl;
+        cout << "menghapus fitur yang sudah ada dengan tujuan yang lebih baik " << endl;
+        cout << endl;
+        cout << "https://github.com/yanuarakhid/Aplikasi-Bank" << endl;
+        cout << endl;
         cout << "|======================================================================================|\n";
         system("pause");
         goto home;
